@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "RotR-Protoype.sln"
+    "dotnet.defaultSolution": "Rise_of_the_Reefs_Proto.sln"
 }
