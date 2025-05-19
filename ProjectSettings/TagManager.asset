@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Prop
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -41,6 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
+  - name: Background
     uniqueID: 3945305913
+    locked: 0
+  - name: Midground
+    uniqueID: 786797329
+    locked: 0
+  - name: Foreground
+    uniqueID: 4088930489
     locked: 0
