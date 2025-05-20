@@ -9,17 +9,21 @@ public class PauseGame : MonoBehaviour
     public Button restartButton;
     public Button quitButton;
 
+    private Canvas[] allCanvases;
+
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
 
-        // Hook up the button functions
+        allCanvases = FindObjectsOfType<Canvas>(true);
+
         resumeButton.onClick.AddListener(ResumeGame);
         restartButton.onClick.AddListener(RestartGame);
         quitButton.onClick.AddListener(QuitGame);
     }
+
 
     void Update()
     {
@@ -34,17 +38,33 @@ public class PauseGame : MonoBehaviour
 
     void Pause()
     {
+        foreach (Canvas canvas in allCanvases)
+        {
+            if (!pauseMenuUI.transform.IsChildOf(canvas.transform) && canvas.gameObject != pauseMenuUI)
+            {
+                canvas.gameObject.SetActive(false);
+            }
+        }
+
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
+
+
     void ResumeGame()
     {
+        foreach (Canvas canvas in allCanvases)
+        {
+            canvas.gameObject.SetActive(true);
+        }
+
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
+
 
     void RestartGame()
     {

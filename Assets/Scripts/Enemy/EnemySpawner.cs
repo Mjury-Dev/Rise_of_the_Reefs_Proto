@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -34,27 +33,27 @@ public class EnemySpawner : MonoBehaviour
     public bool maxEnemiesReached = false;
     public float waveInterval;
 
-    [Header("SpawnPositions")]
+    [Header("Spawn Positions")]
     public List<Transform> relativeSpawnPoints;
 
     Transform player;
 
     void Start()
     {
-        player = FindObjectOfType<PlayerStats>().transform; 
+        player = FindObjectOfType<PlayerStats>().transform;
         CalculateWaveQuota();
     }
 
     void Update()
     {
-        if(currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0)
+        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0)
         {
             StartCoroutine(BeginNextWave());
         }
 
         spawnTimer += Time.deltaTime;
 
-        if(spawnTimer >= waves[currentWaveCount].spawnInterval)
+        if (spawnTimer >= waves[currentWaveCount].spawnInterval)
         {
             spawnTimer = 0f;
             SpawnEnemies();
@@ -65,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(waveInterval);
 
-        if(currentWaveCount < waves.Count - 1)
+        if (currentWaveCount < waves.Count - 1)
         {
             currentWaveCount++;
             CalculateWaveQuota();
@@ -81,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         waves[currentWaveCount].waveQuota = currentWaveQuota;
-        Debug.LogWarning(currentWaveQuota);
+        Debug.LogWarning($"Wave Quota for {waves[currentWaveCount].waveName}: {currentWaveQuota}");
     }
 
     void SpawnEnemies()
@@ -98,16 +97,23 @@ public class EnemySpawner : MonoBehaviour
                         return;
                     }
 
-                    Instantiate(enemyGroup.enemyPrefab, player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position, Quaternion.identity);
+                    if (enemyGroup.enemyPrefab != null && relativeSpawnPoints.Count > 0)
+                    {
+                        Vector3 spawnPosition = player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position;
+                        Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
 
-                    enemyGroup.spawnCount++;
-                    waves[currentWaveCount].spawnCount++;
-                    enemiesAlive++;
+                        enemyGroup.spawnCount++;
+                        waves[currentWaveCount].spawnCount++;
+                        enemiesAlive++;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Enemy prefab or spawn points not set!");
+                    }
                 }
             }
         }
-
-        if( enemiesAlive < maxEnemiesAllowed)
+        else if (enemiesAlive < maxEnemiesAllowed)
         {
             maxEnemiesReached = false;
         }
@@ -116,5 +122,9 @@ public class EnemySpawner : MonoBehaviour
     public void OnEnemyKilled()
     {
         enemiesAlive--;
+        if (enemiesAlive < maxEnemiesAllowed)
+        {
+            maxEnemiesReached = false;
+        }
     }
 }

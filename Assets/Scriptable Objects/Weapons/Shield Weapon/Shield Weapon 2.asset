@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e9b7907e31b1b47bc56109a3d9401d, type: 3}
+  m_Name: Shield Weapon 2
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1071824801233803235, guid: 8322dda59459dc147805bbc7689f37cc, type: 3}
+  damage: 1
+  speed: 0
+  cooldownDuration: 2
+  spinSpeed: 480
+  orbitSpeed: 120
+  pierce: 0
+  bounce: 0
+  level: 2
+  nextLevelPrefab: {fileID: 0}
+  icon: {fileID: -1013555026, guid: c1349ca394ee82a43850743b797939e7, type: 3}

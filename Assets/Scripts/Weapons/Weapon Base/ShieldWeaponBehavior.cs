@@ -11,6 +11,11 @@ public class ShieldWeaponBehavior : MonoBehaviour
     protected float spinSpeed;
     protected float orbitSpeed;
 
+    public float GetCurrentDamage()
+    {
+        return currentDamage *= FindObjectOfType<PlayerStats>().currentStrength;
+    }
+
     private void Awake()
     {
         currentDamage = weaponData.Damage;
@@ -30,13 +35,13 @@ public class ShieldWeaponBehavior : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.Hurt(currentDamage);
+            enemy.Hurt(GetCurrentDamage());
         }
         else if (col.CompareTag("Prop"))
         {
             if (col.gameObject.TryGetComponent(out BreakableProps breakable))
             {
-                breakable.TakeDamage(currentDamage);
+                breakable.TakeDamage(GetCurrentDamage());
             }
         }
     }

@@ -23,6 +23,11 @@ public class ProjectileWeaponBehavior : MonoBehaviour
         currentBounce = weaponData.Bounce;
     }
 
+    public float GetCurrentDamage()
+    {
+        return currentDamage *= FindObjectOfType<PlayerStats>().currentStrength;
+    }
+
     protected Vector3 direction;
     public float destroyAfterSeconds;
     
@@ -118,7 +123,7 @@ public class ProjectileWeaponBehavior : MonoBehaviour
             hitEnemies.Add(hitTransform);
 
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.Hurt(currentDamage);
+            enemy.Hurt(GetCurrentDamage());
 
             if (currentBounce > 0)
             {
@@ -145,7 +150,7 @@ public class ProjectileWeaponBehavior : MonoBehaviour
         {
             if(col.gameObject.TryGetComponent(out BreakableProps breakable))
             {
-                breakable.TakeDamage(currentDamage);
+                breakable.TakeDamage(GetCurrentDamage());
                 ReducePierce();
             }
         }

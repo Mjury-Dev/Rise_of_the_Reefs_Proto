@@ -36,4 +36,17 @@ public class WeaponScriptableObject : ScriptableObject
     [SerializeField]
     int bounce;
     public int Bounce { get => bounce; set => bounce = value; }
+
+    [SerializeField]
+    int level;
+    public int Level { get => level; set => level = value; }
+
+    [SerializeField]
+    GameObject nextLevelPrefab;
+    public GameObject NextLevelPrefab { get => nextLevelPrefab; set => nextLevelPrefab = value; }
+
+    [SerializeField]
+    Sprite icon;
+    public Sprite Icon { get => icon; set => icon = value; }
+
 }

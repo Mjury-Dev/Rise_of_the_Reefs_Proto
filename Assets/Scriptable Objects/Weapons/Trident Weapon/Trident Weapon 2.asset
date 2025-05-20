@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9e9b7907e31b1b47bc56109a3d9401d, type: 3}
-  m_Name: Trident Weapon
+  m_Name: Trident Weapon 2
   m_EditorClassIdentifier: 
   prefab: {fileID: 1575801689597816159, guid: b03413c76f14b214193dea5093a063dd, type: 3}
   damage: 1
-  speed: 4
+  speed: 5
   cooldownDuration: 1
   spinSpeed: 0
   orbitSpeed: 0
-  pierce: 3
-  bounce: 3
+  pierce: 2
+  bounce: 0
+  level: 2
+  nextLevelPrefab: {fileID: 0}
+  icon: {fileID: -258696086, guid: c1349ca394ee82a43850743b797939e7, type: 3}
