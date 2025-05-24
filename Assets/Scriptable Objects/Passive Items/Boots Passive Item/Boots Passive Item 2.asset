@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aac8b27dc158441aa1301ae2aa792f, type: 3}
   m_Name: Boots Passive Item 2
   m_EditorClassIdentifier: 
-  multiplier: 20
+  multiplier: 50
   level: 2
   nextLevelPrefab: {fileID: 0}
   icon: {fileID: 21300000, guid: 1af241fd6353f624dabc9a6d7c9b87ad, type: 3}

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : PassiveItem
+public class AmuletPassiveItem : PassiveItem
 {
     protected override void ApplyModifier()
     {
-        player.currentStrength *= 1 + passiveItemData.Multiplier / 100f; 
+        player.CurrentStrength *= 1 + passiveItemData.Multiplier / 100f; 
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trident Character
   m_EditorClassIdentifier: 
   startingWeapon: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 3
   recovery: 0.1
   moveSpeed: 5
   strength: 1

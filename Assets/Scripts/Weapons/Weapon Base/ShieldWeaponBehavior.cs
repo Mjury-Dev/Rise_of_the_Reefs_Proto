@@ -13,7 +13,7 @@ public class ShieldWeaponBehavior : MonoBehaviour
 
     public float GetCurrentDamage()
     {
-        return currentDamage *= FindObjectOfType<PlayerStats>().currentStrength;
+        return currentDamage *= FindObjectOfType<PlayerStats>().CurrentStrength;
     }
 
     private void Awake()
