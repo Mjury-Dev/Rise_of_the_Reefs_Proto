@@ -27,6 +27,7 @@ public class PlayerStats : MonoBehaviour
                 if (GameManager.instance != null)
                 {
                     GameManager.instance.currentHealthDisplay.text = "Health: " + currentHealth;
+                    GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(characterData.MaxHealth));
                 }
             }
         }
@@ -172,6 +173,10 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.currentProjectileSpeedDisplay.text = "Proj Spd: +" + CurrentProjectileSpeed + "%";
         GameManager.instance.currentMagnetDisplay.text = "Magnet: +" + CurrentMagnet * 10 + "%";
 
+        GameManager.instance.AssignChosenCharacterUI(characterData);
+        GameManager.instance.UpdateExpCounter(experience, experienceCap);
+        GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(characterData.MaxHealth));
+        GameManager.instance.UpdateLevelCounter(level);
     }
 
     private void Update()
@@ -183,14 +188,13 @@ public class PlayerStats : MonoBehaviour
         {
             isInvincible = false;
         }
-
         Recover();
     }
 
     public void IncreaseExperience(int amount) 
     {
         experience += amount;
-
+        GameManager.instance.UpdateExpCounter(experience, experienceCap);
         LevelUpChecker();
     }
 
@@ -199,6 +203,7 @@ public class PlayerStats : MonoBehaviour
         if(experience >= experienceCap)
         {
             level++;
+            GameManager.instance.UpdateLevelCounter(level);
             experience -= experienceCap;
 
             int experienceCapIncrease = 0;
@@ -220,7 +225,6 @@ public class PlayerStats : MonoBehaviour
             if (!isInvincible)
             {
                 CurrentHealth -= dmg;
-
                 invincibilityTimer = invincibilityDuration;
                 isInvincible = true;
 
@@ -237,6 +241,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (!GameManager.instance.isGameOver)
         {
+            GameManager.instance.AssignLevelReached(level);
+            GameManager.instance.AssignChosenWeaponAndPassiveItemsUI(inventory.weaponUISlots, inventory.passiveItemUISlots);
             GameManager.instance.GameOver();
         }
     }

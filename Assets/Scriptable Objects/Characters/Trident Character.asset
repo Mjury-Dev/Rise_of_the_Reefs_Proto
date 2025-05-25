@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3194e38a4e2ee734294f04befd7be414, type: 3}
   m_Name: Trident Character
   m_EditorClassIdentifier: 
+  icon: {fileID: 1059804674, guid: 7c617ec40ee01314698d19018cf0a831, type: 3}
   startingWeapon: {fileID: 0}
-  maxHealth: 3
+  maxHealth: 10
   recovery: 0.1
   moveSpeed: 5
   strength: 1

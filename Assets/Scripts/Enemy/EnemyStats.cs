@@ -47,6 +47,8 @@ public class EnemyStats : MonoBehaviour
     public void Kill()
     {
         Destroy(gameObject);
+        GameManager.instance.EnemyKilled();
+        GameManager.instance.UpdateKillCounter();
     }
 
     private void OnTriggerEnter2D(Collider2D col)

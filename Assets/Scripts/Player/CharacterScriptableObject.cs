@@ -7,30 +7,34 @@ using UnityEngine;
 public class CharacterScriptableObject : ScriptableObject
 {
     [SerializeField]
+    Sprite icon;
+    public Sprite Icon { get => icon; private set => icon = value; }
+
+    [SerializeField]
     GameObject startingWeapon;
-    public GameObject StartingWeapon { get => startingWeapon; set => startingWeapon = value; }
+    public GameObject StartingWeapon { get => startingWeapon; private set => startingWeapon = value; }
 
     [SerializeField]
     float maxHealth;
-    public float MaxHealth{ get => maxHealth; set => maxHealth = value; }
+    public float MaxHealth{ get => maxHealth; private set => maxHealth = value; }
 
     [SerializeField]
     float recovery;
-    public float Recovery { get => recovery; set => recovery = value; }
+    public float Recovery { get => recovery; private set => recovery = value; }
 
     [SerializeField]
     float moveSpeed;
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public float MoveSpeed { get => moveSpeed; private set => moveSpeed = value; }
 
     [SerializeField]
     float strength;
-    public float Strength { get => strength; set => strength = value; }
+    public float Strength { get => strength; private set => strength = value; }
         
     [SerializeField]
     float projectileSpeed;
-    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public float ProjectileSpeed { get => projectileSpeed; private set => projectileSpeed = value; }
 
     [SerializeField]
     float magnet;
-    public float Magnet { get => magnet; set => magnet = value; }        
+    public float Magnet { get => magnet; private set => magnet = value; }        
 }
