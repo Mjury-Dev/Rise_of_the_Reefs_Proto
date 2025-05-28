@@ -161,6 +161,12 @@ MonoBehaviour:
   - name: Healing Potion
     itemPrefab: {fileID: 375213560542558878, guid: b5a770d72e65ff146a17788999484566, type: 3}
     dropRate: 30
-  - name: Blue Gem
-    itemPrefab: {fileID: 817535974122149835, guid: 2964200227409ca4c9def5dba209cb38, type: 3}
-    dropRate: 70
+  - name: Gold 1
+    itemPrefab: {fileID: 508750266933378645, guid: 3ca9a87d14a3677409d40a14daf0b00b, type: 3}
+    dropRate: 30
+  - name: Gold 2
+    itemPrefab: {fileID: 3795781739894940614, guid: c5f7ac2fe1ebbde40ad3ae4e937f6091, type: 3}
+    dropRate: 25
+  - name: Gold 3
+    itemPrefab: {fileID: 5193923287621983371, guid: f8cce110d45383448b4268810790bcb7, type: 3}
+    dropRate: 5

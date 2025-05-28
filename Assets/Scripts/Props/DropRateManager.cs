@@ -16,20 +16,27 @@ public class DropRateManager : MonoBehaviour
 
     void OnDestroy()
     {
-        float randomNumber = UnityEngine.Random.Range(0f, 100f);
-        List<Drops> possibleDrops = new List<Drops>();
+        if (!gameObject.scene.isLoaded)
+            return;
 
-        foreach (Drops rate in drops)
+        float totalWeight = 0f;
+        foreach (Drops drop in drops)
         {
-            if (randomNumber <= rate.dropRate)
+            totalWeight += drop.dropRate;
+        }
+
+        float randomValue = Random.Range(0f, totalWeight);
+        float cumulative = 0f;
+
+        foreach (Drops drop in drops)
+        {
+            cumulative += drop.dropRate;
+            if (randomValue <= cumulative)
             {
-                possibleDrops.Add(rate);
+                Instantiate(drop.itemPrefab, transform.position, Quaternion.identity);
+                break;
             }
         }
-        if (possibleDrops.Count > 0)
-        {
-            Drops drops = possibleDrops[UnityEngine.Random.Range(0, possibleDrops.Count)];
-            Instantiate(drops.itemPrefab, transform.position, Quaternion.identity);
-        }
     }
+
 }
