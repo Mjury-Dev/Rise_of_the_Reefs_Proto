@@ -16,3 +16,5 @@ MonoBehaviour:
   level: 1
   nextLevelPrefab: {fileID: 591129222444607778, guid: 6e259e8e5f1808f43bf11a468605596c, type: 3}
   icon: {fileID: 21300000, guid: 1af241fd6353f624dabc9a6d7c9b87ad, type: 3}
+  passiveItemName: Boots Level 1
+  description: Mov. Speed +10%

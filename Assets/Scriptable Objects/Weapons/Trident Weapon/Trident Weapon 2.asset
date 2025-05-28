@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e9b7907e31b1b47bc56109a3d9401d, type: 3}
   m_Name: Trident Weapon 2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1575801689597816159, guid: b03413c76f14b214193dea5093a063dd, type: 3}
-  damage: 1
+  prefab: {fileID: 1575801689597816159, guid: 3e7ac7713b3d4374e8ee9be891a807ec, type: 3}
+  damage: 2
   speed: 5
   cooldownDuration: 1
   spinSpeed: 0
@@ -21,5 +21,7 @@ MonoBehaviour:
   pierce: 2
   bounce: 0
   level: 2
-  nextLevelPrefab: {fileID: 0}
+  nextLevelPrefab: {fileID: 7748456070021989650, guid: be920d788016bf148bc980f28e88efa1, type: 3}
+  weaponName: Trident Level 2
+  description: + Pierce, + Dmg
   icon: {fileID: -258696086, guid: c1349ca394ee82a43850743b797939e7, type: 3}

@@ -22,4 +22,6 @@ MonoBehaviour:
   bounce: 0
   level: 1
   nextLevelPrefab: {fileID: 5603947354261972072, guid: 3adf238a2d562ea449ca6c0574a22d73, type: 3}
+  weaponName: Shield Level 1
+  description: Spinning shield that revolves around you.
   icon: {fileID: -1013555026, guid: c1349ca394ee82a43850743b797939e7, type: 3}

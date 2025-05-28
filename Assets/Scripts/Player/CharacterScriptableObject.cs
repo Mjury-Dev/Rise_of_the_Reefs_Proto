@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObjects/Character")]
@@ -36,5 +37,9 @@ public class CharacterScriptableObject : ScriptableObject
 
     [SerializeField]
     float magnet;
-    public float Magnet { get => magnet; private set => magnet = value; }        
+    public float Magnet { get => magnet; private set => magnet = value; }
+
+    [SerializeField]
+    int runGold;
+    public int RunGold { get => runGold; private set => runGold = value; }
 }

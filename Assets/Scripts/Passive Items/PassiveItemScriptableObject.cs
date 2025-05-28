@@ -20,4 +20,12 @@ public class PassiveItemScriptableObject : ScriptableObject
     [SerializeField]
     Sprite icon;
     public Sprite Icon { get => icon; set => icon = value; }
+
+    [SerializeField]
+    string passiveItemName;
+    public string PassiveItemName { get => name; set => name = value; }
+
+    [SerializeField]
+    string description;
+    public string Description { get => description; set => description = value; }
 }

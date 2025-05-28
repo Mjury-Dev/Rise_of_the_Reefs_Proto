@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e9b7907e31b1b47bc56109a3d9401d, type: 3}
+  m_Name: Trident Weapon 5
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1575801689597816159, guid: 915d8a5e8acadf844803c16b243c6f59, type: 3}
+  damage: 3
+  speed: 8
+  cooldownDuration: 0.5
+  spinSpeed: 0
+  orbitSpeed: 0
+  pierce: 4
+  bounce: 4
+  level: 5
+  nextLevelPrefab: {fileID: 0}
+  weaponName: Trident Level 5
+  description: + Cooldown, + Bounce, + Pierce
+  icon: {fileID: -258696086, guid: c1349ca394ee82a43850743b797939e7, type: 3}

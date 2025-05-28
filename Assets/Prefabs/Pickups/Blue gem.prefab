@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5059144267550948067}
   - component: {fileID: 2416341861927019230}
   - component: {fileID: 8544314974878303638}
+  - component: {fileID: -3351559307119046937}
   m_Layer: 0
   m_Name: Blue gem
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42e8c46b3a16e541a4cacb8a9c9b0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasBeenCollected: 0
   experienceGranted: 100
 --- !u!61 &2416341861927019230
 BoxCollider2D:
@@ -172,3 +174,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3351559307119046937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817535974122149835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3580429bfe3c6444ead81f41351b14f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 3
+  magnitude: 0.1
+  direction: {x: 0, y: 1, z: 0}

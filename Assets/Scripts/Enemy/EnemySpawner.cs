@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
     public int maxEnemiesAllowed;
     public bool maxEnemiesReached = false;
     public float waveInterval;
+    bool isWaveActive = false;
 
     [Header("Spawn Positions")]
     public List<Transform> relativeSpawnPoints;
@@ -46,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0)
+        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount == 0 && !isWaveActive)
         {
             StartCoroutine(BeginNextWave());
         }
@@ -62,10 +63,13 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator BeginNextWave()
     {
+        isWaveActive = true;
+
         yield return new WaitForSeconds(waveInterval);
 
         if (currentWaveCount < waves.Count - 1)
         {
+            isWaveActive = false;
             currentWaveCount++;
             CalculateWaveQuota();
         }
@@ -91,12 +95,6 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (enemyGroup.spawnCount < enemyGroup.enemyCount)
                 {
-                    if (enemiesAlive >= maxEnemiesAllowed)
-                    {
-                        maxEnemiesReached = true;
-                        return;
-                    }
-
                     if (enemyGroup.enemyPrefab != null && relativeSpawnPoints.Count > 0)
                     {
                         Vector3 spawnPosition = player.position + relativeSpawnPoints[Random.Range(0, relativeSpawnPoints.Count)].position;
@@ -106,16 +104,13 @@ public class EnemySpawner : MonoBehaviour
                         waves[currentWaveCount].spawnCount++;
                         enemiesAlive++;
                     }
-                    else
+                    if ( enemiesAlive >= maxEnemiesAllowed)
                     {
-                        Debug.LogWarning("Enemy prefab or spawn points not set!");
+                        maxEnemiesReached = true;
+                        return;
                     }
                 }
             }
-        }
-        else if (enemiesAlive < maxEnemiesAllowed)
-        {
-            maxEnemiesReached = false;
         }
     }
 

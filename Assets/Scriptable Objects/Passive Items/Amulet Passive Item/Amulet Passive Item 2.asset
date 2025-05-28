@@ -16,3 +16,5 @@ MonoBehaviour:
   level: 2
   nextLevelPrefab: {fileID: 0}
   icon: {fileID: 21300000, guid: 80d8f729ab7ac754786f61207874bcf5, type: 3}
+  passiveItemName: Amulet Level 2
+  description: Strength +25%

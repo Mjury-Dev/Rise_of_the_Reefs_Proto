@@ -123,7 +123,9 @@ public class ProjectileWeaponBehavior : MonoBehaviour
             hitEnemies.Add(hitTransform);
 
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.Hurt(GetCurrentDamage());
+            enemy.Hurt(GetCurrentDamage(), transform.position);
+
+            bool bounced = false;
 
             if (currentBounce > 0)
             {
@@ -133,28 +135,45 @@ public class ProjectileWeaponBehavior : MonoBehaviour
                 {
                     Vector3 newDirection = (nextTarget.transform.position - transform.position).normalized;
                     direction = newDirection;
-                    DirectionChecker(direction); // Update orientation
+                    DirectionChecker(direction);
 
                     Rigidbody2D rb = GetComponent<Rigidbody2D>();
                     if (rb != null)
                     {
                         rb.velocity = direction * currentSpeed;
                     }
-                    ReducePierce();
-                    ReduceBounce();
-                    return;
+
+                    currentBounce--;
+                    bounced = true;
+                }
+            }
+
+            currentPierce--;
+
+            // Destroy only if no pierce remains and we didn’t bounce
+            if (currentPierce <= 0 && !bounced)
+            {
+                Destroy(gameObject);
+            }
+
+            return;
+        }
+
+        if (col.CompareTag("Prop"))
+        {
+            if (col.TryGetComponent(out BreakableProps breakable))
+            {
+                breakable.TakeDamage(GetCurrentDamage());
+                currentPierce--;
+
+                if (currentPierce <= 0)
+                {
+                    Destroy(gameObject);
                 }
             }
         }
-        else if (col.CompareTag("Prop"))
-        {
-            if(col.gameObject.TryGetComponent(out BreakableProps breakable))
-            {
-                breakable.TakeDamage(GetCurrentDamage());
-                ReducePierce();
-            }
-        }
     }
+
 
 
     void ReducePierce()

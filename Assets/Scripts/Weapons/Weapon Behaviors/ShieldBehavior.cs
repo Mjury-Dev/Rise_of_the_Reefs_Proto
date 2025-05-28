@@ -37,7 +37,7 @@ public class ShieldBehavior : ShieldWeaponBehavior
         if(col.CompareTag("Enemy") && !markedEnemies.Contains(col.gameObject))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.Hurt(GetCurrentDamage());
+            enemy.Hurt(GetCurrentDamage(), transform.position);
 
             markedEnemies.Add(col.gameObject);
         }

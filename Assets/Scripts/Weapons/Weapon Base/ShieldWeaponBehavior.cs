@@ -35,7 +35,7 @@ public class ShieldWeaponBehavior : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             EnemyStats enemy = col.GetComponent<EnemyStats>();
-            enemy.Hurt(GetCurrentDamage());
+            enemy.Hurt(GetCurrentDamage(), transform.position);
         }
         else if (col.CompareTag("Prop"))
         {

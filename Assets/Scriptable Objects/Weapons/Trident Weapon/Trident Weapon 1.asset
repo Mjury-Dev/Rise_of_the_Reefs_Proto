@@ -22,4 +22,6 @@ MonoBehaviour:
   bounce: 0
   level: 1
   nextLevelPrefab: {fileID: 7748456070021989650, guid: f9115685d07be604c910dd75fdbf2c25, type: 3}
+  weaponName: Trident Level 1
+  description: Throw piercing tridents in a straight line.
   icon: {fileID: -258696086, guid: c1349ca394ee82a43850743b797939e7, type: 3}

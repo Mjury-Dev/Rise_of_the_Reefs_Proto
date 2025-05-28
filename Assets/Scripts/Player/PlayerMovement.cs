@@ -14,6 +14,18 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Vector2 lastMovedVector;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 5f;
+    public GameObject afterImagePrefab;
+    public float afterImageSpawnInterval = 0.01f;
+
+    private bool isDashing = false;
+    private float dashCooldownTimer = 0f;
+    private float afterImageTimer = 0f;
+    private Vector2 dashDirection;
+
     //References
     Rigidbody2D rb;
     PlayerStats player;
@@ -27,8 +39,64 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        InputManagement();
+        if (!isDashing)
+        {
+            InputManagement();
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownTimer <= 0f && moveDir != Vector2.zero)
+            {
+                StartCoroutine(Dash());
+            }
+        }
+
+        if (dashCooldownTimer > 0f)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+        }
     }
+
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        dashDirection = moveDir;
+        float timer = 0f;
+        afterImageTimer = 0f;
+
+        while (timer < dashDuration)
+        {
+            rb.velocity = dashDirection * dashSpeed;
+
+            afterImageTimer += Time.deltaTime;
+            if (afterImageTimer >= afterImageSpawnInterval)
+            {
+                SpawnAfterImage();
+                afterImageTimer = 0f;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isDashing = false;
+        dashCooldownTimer = dashCooldown;
+    }
+
+    void SpawnAfterImage()
+    {
+        GameObject afterImage = Instantiate(afterImagePrefab, transform.position, Quaternion.identity);
+        SpriteRenderer sr = afterImage.GetComponent<SpriteRenderer>();
+        SpriteRenderer playerSr = GetComponent<SpriteRenderer>();
+        if (sr && playerSr)
+        {
+            sr.sprite = playerSr.sprite;
+            sr.flipX = playerSr.flipX;
+            sr.color = new Color(1, 1, 1, 0.5f); // semi-transparent
+        }
+
+        Destroy(afterImage, 0.1f); // destroy after some time
+    }
+
+
 
     void FixedUpdate()
     {
@@ -63,14 +131,15 @@ public class PlayerMovement : MonoBehaviour
             lastMovedVector = new Vector2(lastHorizontalVector, lastVerticalVector);
         }
     }
-
+        
     void Move()
     {
-        if (GameManager.instance.isGameOver || GameManager.instance.isPaused)
+        if (GameManager.instance.isGameOver || GameManager.instance.isPaused || isDashing)
         {
             return;
         }
 
         rb.velocity = new Vector2(moveDir.x * player.CurrentMoveSpeed, moveDir.y * player.CurrentMoveSpeed);
     }
+
 }

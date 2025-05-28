@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     public CharacterScriptableObject characterData;
+    private System.Action assignGoldAction;
 
     public float currentHealth;
     public float currentRecovery;
@@ -14,6 +16,7 @@ public class PlayerStats : MonoBehaviour
     public float currentStrength;
     public float currentProjectileSpeed;
     public float currentMagnet;
+    public int currentGold;
 
     #region Current Stats Properties
     public float CurrentHealth
@@ -112,6 +115,18 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
+    public int CurrentGold
+    {
+        get { return currentGold;  }
+        set
+        {
+            if (currentGold != value)
+            {
+                currentGold = value;
+            }
+        }
+    }
     #endregion
 
     [Header("Experience/Level")]
@@ -123,6 +138,9 @@ public class PlayerStats : MonoBehaviour
     public GameObject secondWeaponTest;
     public GameObject firstPassiveItemTest;
     public GameObject secondPassiveItemTest;
+
+    [Header("DamageFlash")]
+    private SpriteRenderer sr;
 
     private void Awake()
     {
@@ -137,10 +155,12 @@ public class PlayerStats : MonoBehaviour
         CurrentMagnet = characterData.Magnet;
 
         SpawnWeapon(firstWeaponTest);
-        SpawnWeapon(secondWeaponTest);
+        //SpawnWeapon(secondWeaponTest);
         
         SpawnPassiveItem(firstPassiveItemTest);
-        SpawnPassiveItem(secondPassiveItemTest);
+        //SpawnPassiveItem(secondPassiveItemTest);
+
+        sr = GetComponent<SpriteRenderer>();
     }
 
     [System.Serializable]
@@ -162,6 +182,9 @@ public class PlayerStats : MonoBehaviour
     public int weaponIndex;
     public int passiveItemIndex;
 
+    [Header("UI")]
+    public Image healthBar;
+
     private void Start()
     {
         experienceCap = levelRanges[0].experienceCapIncrease;
@@ -177,6 +200,7 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.UpdateExpCounter(experience, experienceCap);
         GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(characterData.MaxHealth));
         GameManager.instance.UpdateLevelCounter(level);
+        GameManager.instance.UpdateGoldcounter(CurrentGold);
     }
 
     private void Update()
@@ -189,6 +213,26 @@ public class PlayerStats : MonoBehaviour
             isInvincible = false;
         }
         Recover();
+    }
+
+    private void OnEnable()
+    {
+        assignGoldAction = () => GameManager.instance.AssignGoldEarned(CurrentGold);
+        GameManager.OnGameOver += FinalizeSessionGold;
+        GameManager.OnGameOver += assignGoldAction;
+        Debug.Log("CurrencyManager has been enabled");
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameOver -= FinalizeSessionGold;
+        Debug.Log("CurrencyManager has been disabled");
+    }
+    private void FinalizeSessionGold()
+    {
+        CurrencyManager.instance.AddCurrency(CurrentGold);
+        CurrencyManager.instance.SaveCurrency();
+        Debug.Log("Session gold added to total: " + CurrentGold);
     }
 
     public void IncreaseExperience(int amount) 
@@ -204,6 +248,7 @@ public class PlayerStats : MonoBehaviour
         {
             level++;
             GameManager.instance.UpdateLevelCounter(level);
+            GameManager.instance.StartLevelUp();
             experience -= experienceCap;
 
             int experienceCapIncrease = 0;
@@ -215,27 +260,51 @@ public class PlayerStats : MonoBehaviour
                 }
             }
             experienceCap += experienceCapIncrease;
+
         }
     }
+    IEnumerator DamageFlash()
+    {
+        int flashes = 5;
+        float flashDelay = 0.05f;
+
+        for (int i = 0; i < flashes; i++)
+        {
+            SetAlpha(0f); // invisible
+            yield return new WaitForSeconds(flashDelay);
+            SetAlpha(1f); // visible
+            yield return new WaitForSeconds(flashDelay);
+        }
+    }
+
+    void SetAlpha(float alpha)
+    {
+        if (sr != null)
+        {
+            Color c = sr.color;
+            c.a = alpha;
+            sr.color = c;
+        }
+    }
+
 
     public void TakeDamage(float dmg)
     {
         if (!isInvincible)
         {
-            if (!isInvincible)
-            {
-                CurrentHealth -= dmg;
-                invincibilityTimer = invincibilityDuration;
-                isInvincible = true;
+            CurrentHealth -= dmg;
+            invincibilityTimer = invincibilityDuration;
+            isInvincible = true;
 
-                if (CurrentHealth <= 0)
-                {
-                    Kill();
-                }
+            StartCoroutine(DamageFlash());
+
+            if (CurrentHealth <= 0)
+            {
+                Kill();
             }
         }
-        
     }
+
 
     public void Kill()
     {
@@ -257,6 +326,12 @@ public class PlayerStats : MonoBehaviour
                 CurrentHealth = characterData.MaxHealth;
             }
         }
+    }
+
+    public void addGold(int amount)
+    {
+        CurrentGold += amount;
+        GameManager.instance.UpdateGoldcounter(CurrentGold);
     }
 
     void Recover()
@@ -290,7 +365,7 @@ public class PlayerStats : MonoBehaviour
 
         weaponIndex++;
     }
-
+        
 
     public void SpawnPassiveItem(GameObject passiveItem)
     {
