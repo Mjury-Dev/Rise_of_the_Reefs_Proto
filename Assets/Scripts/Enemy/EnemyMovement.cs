@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
     Transform player;
     EnemyStats enemy;
+    Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
+
+    [Header("Sprite Settings")]
+    [Tooltip("Set to true if sprite faces right by default, false if it faces left")]
+    public bool spriteFacesRight = true; // Toggle in Inspector
 
     Vector2 knockbackVelocity;
     float knockbackDuration;
@@ -16,18 +18,31 @@ public class EnemyMovement : MonoBehaviour
     {
         enemy = GetComponent<EnemyStats>();
         player = FindObjectOfType<PlayerMovement>().transform;
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (knockbackDuration > 0)
         {
-            transform.position += (Vector3)knockbackVelocity * Time.deltaTime;
-            knockbackDuration -= Time.deltaTime;
+            rb.velocity = knockbackVelocity;
+            knockbackDuration -= Time.fixedDeltaTime;
         }
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemy.currentMoveSpeed * Time.deltaTime);    //Constantly move the enemy towards the player
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = direction * enemy.currentMoveSpeed;
+
+            // Flip sprite based on movement direction
+            if (rb.velocity.x > 0.1f) // Moving right
+            {
+                spriteRenderer.flipX = !spriteFacesRight;
+            }
+            else if (rb.velocity.x < -0.1f) // Moving left
+            {
+                spriteRenderer.flipX = spriteFacesRight;
+            }
         }
     }
 

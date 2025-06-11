@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        AudioManager.Instance.PlaySFX("Dash", transform.position);
         isDashing = true;
         dashDirection = moveDir;
         float timer = 0f;

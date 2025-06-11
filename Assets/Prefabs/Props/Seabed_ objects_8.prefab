@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  damageColor: {r: 1, g: 1, b: 1, a: 1}
+  damageFlashDuration: 0.2
+  deathFadeTime: 0.6
+  flashMaterial: {fileID: 2100000, guid: a919d1862e2cb6949a5fe3ec58cb9c19, type: 2}
 --- !u!61 &-2221053777217685738
 BoxCollider2D:
   m_ObjectHideFlags: 0

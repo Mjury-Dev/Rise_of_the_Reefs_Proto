@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5aac8b27dc158441aa1301ae2aa792f, type: 3}
+  m_Name: Anemone Cloak Level 3
+  m_EditorClassIdentifier: 
+  multiplier: 50
+  level: 3
+  nextLevelPrefab: {fileID: 2252067728897510210, guid: 421bc14d230147c4491189543ae9f162, type: 3}
+  icon: {fileID: 1072002716, guid: 5ec002493d9b8ae4189b05d4f34366c9, type: 3}
+  passiveItemName: Anemone Cloak Level 3
+  description: 50% Damage reflection

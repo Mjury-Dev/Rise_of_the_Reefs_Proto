@@ -207,13 +207,21 @@ public class InventoryManager : MonoBehaviour
                             continue;
                         }
 
-                        upgradeOption.upgradeButton.onClick.AddListener(() => LevelUpWeapon(index, chosen.weaponUpgradeIndex));
+                        upgradeOption.upgradeButton.onClick.AddListener(() => 
+                        {
+                            AudioManager.Instance.PlayUISFX("ClickDefault");
+                            LevelUpWeapon(index, chosen.weaponUpgradeIndex);
+                        });
                         upgradeOption.upgradeDescription.text = chosen.weaponData.NextLevelPrefab.GetComponent<WeaponController>().weaponData.Description;
                         upgradeOption.upgradeNameDisplay.text = chosen.weaponData.NextLevelPrefab.GetComponent<WeaponController>().weaponData.WeaponName;
                     }
                     else
                     {
-                        upgradeOption.upgradeButton.onClick.AddListener(() => player.SpawnWeapon(chosen.initialWeapon));
+                        upgradeOption.upgradeButton.onClick.AddListener(() =>
+                        {
+                            AudioManager.Instance.PlayUISFX("ClickDefault");
+                            player.SpawnWeapon(chosen.initialWeapon);
+                        });
                         upgradeOption.upgradeDescription.text = chosen.weaponData.Description;
                         upgradeOption.upgradeNameDisplay.text = chosen.weaponData.WeaponName;
                     }
@@ -250,13 +258,21 @@ public class InventoryManager : MonoBehaviour
                             continue;
                         }
 
-                        upgradeOption.upgradeButton.onClick.AddListener(() => LevelUpPassiveItem(index, chosen.passiveItemUpgradeIndex));
+                        upgradeOption.upgradeButton.onClick.AddListener(() =>
+                        {
+                            AudioManager.Instance.PlayUISFX("ClickDefault");
+                            LevelUpPassiveItem(index, chosen.passiveItemUpgradeIndex);
+                        });
                         upgradeOption.upgradeDescription.text = chosen.passiveItemData.NextLevelPrefab.GetComponent<PassiveItem>().passiveItemData.Description;
                         upgradeOption.upgradeNameDisplay.text = chosen.passiveItemData.NextLevelPrefab.GetComponent<PassiveItem>().passiveItemData.PassiveItemName;
                     }
                     else
                     {
-                        upgradeOption.upgradeButton.onClick.AddListener(() => player.SpawnPassiveItem(chosen.initialPassiveItem));
+                        upgradeOption.upgradeButton.onClick.AddListener(() =>
+                        {
+                            AudioManager.Instance.PlayUISFX("ClickDefault");
+                            player.SpawnPassiveItem(chosen.initialPassiveItem);
+                        });
                         upgradeOption.upgradeDescription.text = chosen.passiveItemData.Description;
                         upgradeOption.upgradeNameDisplay.text = chosen.passiveItemData.PassiveItemName;
                     }

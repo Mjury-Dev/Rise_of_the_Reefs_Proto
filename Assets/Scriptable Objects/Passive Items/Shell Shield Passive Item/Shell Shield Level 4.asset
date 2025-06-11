@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5aac8b27dc158441aa1301ae2aa792f, type: 3}
+  m_Name: Shell Shield Level 4
+  m_EditorClassIdentifier: 
+  multiplier: 20
+  level: 4
+  nextLevelPrefab: {fileID: 6114226093844482165, guid: d1800474517044f41a9c9f6fcb41f917, type: 3}
+  icon: {fileID: 961078906, guid: 6d0d492ca8d79e84e884516706090bb2, type: 3}
+  passiveItemName: Shell Shield Level 4
+  description: Increase health by 20

@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: -897382077892351140}
   - component: {fileID: 191923067812301414}
   - component: {fileID: -2844315608809252872}
-  m_Layer: 0
+  - component: {fileID: 8852516004689974566}
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -122,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652bc56e1fbb6184584f36398013e37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteFacesRight: 0
 --- !u!114 &-897382077892351140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +161,13 @@ MonoBehaviour:
   drops:
   - name: Blue gem
     itemPrefab: {fileID: 817535974122149835, guid: 2964200227409ca4c9def5dba209cb38, type: 3}
-    dropRate: 99
+    dropRate: 90
+  - name: Blue gem
+    itemPrefab: {fileID: 508750266933378645, guid: 3ca9a87d14a3677409d40a14daf0b00b, type: 3}
+    dropRate: 8
+  - name: Blue gem
+    itemPrefab: {fileID: 3795781739894940614, guid: c5f7ac2fe1ebbde40ad3ae4e937f6091, type: 3}
+    dropRate: 2
 --- !u!58 &-2844315608809252872
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,7 +177,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4678118358697865676}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 28f33d6f7ef82034a9961ccd153dbd7c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -189,9 +197,36 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.359375
+--- !u!50 &8852516004689974566
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678118358697865676}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

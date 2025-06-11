@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // State machine to handle game behavior based on current state
-        Debug.Log("isupgrading: " + isUpgrading);
+        // Debug.Log("isupgrading: " + isUpgrading);
         switch (currentState)
         {
             case GameState.Gameplay:
@@ -129,6 +129,8 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Game over lmao");
                     DisplayGameOver();
                     OnGameOver?.Invoke();
+                    AudioManager.Instance.StopBGM();
+                    AudioManager.Instance.PlayBGM("GameOverTheme");
                 }
                 break;
             case GameState.LevelUp:
@@ -143,6 +145,28 @@ public class GameManager : MonoBehaviour
             default:
                 Debug.LogWarning("GAMESTATE INVALID");  
                 break;
+        }
+
+        // Debug keybind: Press 'K' to kill the player instantly
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (playerObject != null)
+            {
+                var playerStats = playerObject.GetComponent<PlayerStats>();
+                if (playerStats != null)
+                {
+                    Debug.Log("[GameManager] Debug key 'K' pressed: Killing player.");
+                    playerStats.Kill();
+                }
+                else
+                {
+                    Debug.LogWarning("[GameManager] PlayerStats component not found on playerObject.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[GameManager] playerObject reference is null.");
+            }
         }
     }
 
@@ -181,41 +205,48 @@ public class GameManager : MonoBehaviour
     // Coroutine to animate floating text above a target
     IEnumerator GenerateFloatingTextCoroutine(string text, Transform target, float duration = 1f, float speed = 50f)
     {
-        GameObject textObj = new GameObject("Damage Floating Text");
-        RectTransform rect = textObj.AddComponent<RectTransform>();
-        TextMeshProUGUI tmPro = textObj.AddComponent<TextMeshProUGUI>();
+        if (target == null || instance?.damageTextCanvas == null || referenceCamera == null)
+            yield break;
+
+        // Create and configure text object
+        GameObject textObj = new GameObject("Damage Floating Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+        textObj.transform.SetParent(instance.damageTextCanvas.transform, false);
+
+        RectTransform rect = textObj.GetComponent<RectTransform>();
+        TextMeshProUGUI tmPro = textObj.GetComponent<TextMeshProUGUI>();
+
         tmPro.text = text;
-        tmPro.horizontalAlignment = HorizontalAlignmentOptions.Center;
-        tmPro.verticalAlignment = VerticalAlignmentOptions.Middle;
+        tmPro.alignment = TextAlignmentOptions.Center;
         tmPro.fontSize = textFontSize;
-        if (textFont) tmPro.font = textFont;
-        rect.position = referenceCamera.WorldToScreenPoint(target.position);
+        if (textFont != null) tmPro.font = textFont;
 
-        Destroy(textObj, duration); // Auto-destroy after duration
+        Vector3 initialWorldPos = target.position;
+        Vector3 screenPos = referenceCamera.WorldToScreenPoint(initialWorldPos);
+        rect.position = screenPos;
 
+        float elapsed = 0f;
+        float yOffset = 0f;
+        Color originalColor = tmPro.color;
 
-        textObj.transform.SetParent(instance.damageTextCanvas.transform);
-
-        // Damage text animation
-        WaitForEndOfFrame w = new WaitForEndOfFrame();
-        float t = 0;
-        float yOffset = 0;
-        while (t < duration)
+        while (elapsed < duration)
         {
-            yield return w;
-            t += Time.deltaTime;
+            yield return null;
+            elapsed += Time.deltaTime;
+
             if (target == null)
-            {
-                yield break;
-            }
+                break;
 
-            tmPro.color = new Color(tmPro.color.r, tmPro.color.g, tmPro.color.b, 1 - t / duration);
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            tmPro.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
 
-            // Fade out and float upwards
             yOffset += speed * Time.deltaTime;
-            rect.position = referenceCamera.WorldToScreenPoint(target.position + new Vector3(0, yOffset));
+            Vector3 worldPos = target.position + new Vector3(0, yOffset, 0);
+            rect.position = referenceCamera.WorldToScreenPoint(worldPos);
         }
+
+        Destroy(textObj);
     }
+
 
     // Change game state
     public void ChangeState(GameState newState) 
@@ -249,6 +280,16 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
             Debug.Log("Game Resumed");
+
+        }
+    }
+
+    public void ClickResume()
+    {
+        if (currentState == GameState.Paused)
+        {
+            isPaused = false;
+            ResumeGame();
         }
     }
 
@@ -301,7 +342,7 @@ public class GameManager : MonoBehaviour
         backToMenuButton.gameObject.SetActive(false);
         showResultsButton.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
-        StartCoroutine(ShowGameOverTextAfterDelay(3f, 2f));
+        StartCoroutine(ShowGameOverTextAfterDelay(3f, 4.5f));
     }
 
     // UI assignment methods for stats

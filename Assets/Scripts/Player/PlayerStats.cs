@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,11 @@ public class PlayerStats : MonoBehaviour
     public float currentStrength;
     public float currentProjectileSpeed;
     public float currentMagnet;
+    public float MaxHealth;
     public int currentGold;
+
+    public delegate void DamageTakenEvent(float damage, GameObject damageSource);
+    public event DamageTakenEvent OnDamageTaken;
 
     #region Current Stats Properties
     public float CurrentHealth
@@ -30,7 +32,7 @@ public class PlayerStats : MonoBehaviour
                 if (GameManager.instance != null)
                 {
                     GameManager.instance.currentHealthDisplay.text = "Health: " + currentHealth;
-                    GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(characterData.MaxHealth));
+                    GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(MaxHealth));
                 }
             }
         }
@@ -127,6 +129,41 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+    void ApplyUpgradeBonuses()
+{
+    var upgradeManager = PlayerUpgradeManager.Instance;
+
+    if (upgradeManager == null)
+    {
+        Debug.LogWarning("PlayerUpgradeManager not found. Skipping upgrade bonuses.");
+        return;
+    }
+
+    // Defensive check in case bonuses are not initialized
+    float strengthBonus = upgradeManager.GetUpgradeBonus(0);
+    float recoveryBonus = upgradeManager.GetUpgradeBonus(1);
+    float moveSpeedBonus = upgradeManager.GetUpgradeBonus(2);
+    float magnetBonus = upgradeManager.GetUpgradeBonus(3);
+    float healthBonus = upgradeManager.GetUpgradeBonus(4);
+
+    Debug.Log($"Applying Upgrade Bonuses:");
+    Debug.Log($"Strength: added {strengthBonus} to base {characterData.Strength}");
+    Debug.Log($"Recovery: added {recoveryBonus} to base {characterData.Recovery}");
+    Debug.Log($"MoveSpeed: added {moveSpeedBonus} to base {characterData.MoveSpeed}");
+    Debug.Log($"Magnet: added {magnetBonus} to base {characterData.Magnet}");
+    Debug.Log($"MaxHealth: added {healthBonus} to base {characterData.MaxHealth}");
+
+    CurrentStrength += strengthBonus;
+    CurrentRecovery += recoveryBonus;
+    CurrentMoveSpeed += moveSpeedBonus;
+    CurrentMagnet += magnetBonus;
+
+    MaxHealth = characterData.MaxHealth + healthBonus;
+    CurrentHealth = MaxHealth;
+}
+
+
+
     #endregion
 
     [Header("Experience/Level")]
@@ -135,9 +172,6 @@ public class PlayerStats : MonoBehaviour
     public int experienceCap;
 
     public GameObject firstWeaponTest;
-    public GameObject secondWeaponTest;
-    public GameObject firstPassiveItemTest;
-    public GameObject secondPassiveItemTest;
 
     [Header("DamageFlash")]
     private SpriteRenderer sr;
@@ -147,20 +181,21 @@ public class PlayerStats : MonoBehaviour
 
         inventory  = GetComponent<InventoryManager>();
 
-        CurrentHealth = characterData.MaxHealth;
+
+        CurrentHealth = MaxHealth;
         CurrentRecovery = characterData.Recovery;
         CurrentMoveSpeed = characterData.MoveSpeed;
         CurrentStrength = characterData.Strength;
         CurrentProjectileSpeed = characterData.ProjectileSpeed;
         CurrentMagnet = characterData.Magnet;
 
-        SpawnWeapon(firstWeaponTest);
-        //SpawnWeapon(secondWeaponTest);
         
-        SpawnPassiveItem(firstPassiveItemTest);
-        //SpawnPassiveItem(secondPassiveItemTest);
+        //debug
+        SpawnWeapon(firstWeaponTest);
 
         sr = GetComponent<SpriteRenderer>();
+
+        ApplyUpgradeBonuses();
     }
 
     [System.Serializable]
@@ -187,9 +222,10 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+
         experienceCap = levelRanges[0].experienceCapIncrease;
 
-        GameManager.instance.currentHealthDisplay.text = "Health: +" + CurrentHealth + "%";
+        GameManager.instance.currentHealthDisplay.text = "Health: " + MaxHealth;
         GameManager.instance.currentRecoveryDisplay.text = "Recovery: " + CurrentRecovery + " hp/sec";
         GameManager.instance.currentMoveSpeedDisplay.text = "Mov Spd: +" + CurrentMoveSpeed + "%";
         GameManager.instance.currentStrengthDisplay.text = "Strength: +" +  CurrentStrength + "%";
@@ -198,7 +234,7 @@ public class PlayerStats : MonoBehaviour
 
         GameManager.instance.AssignChosenCharacterUI(characterData);
         GameManager.instance.UpdateExpCounter(experience, experienceCap);
-        GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(characterData.MaxHealth));
+        GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(MaxHealth));
         GameManager.instance.UpdateLevelCounter(level);
         GameManager.instance.UpdateGoldcounter(CurrentGold);
     }
@@ -247,6 +283,7 @@ public class PlayerStats : MonoBehaviour
         if(experience >= experienceCap)
         {
             level++;
+            AudioManager.Instance.PlayUISFX("LevelUp"); // Play level up sound effect
             GameManager.instance.UpdateLevelCounter(level);
             GameManager.instance.StartLevelUp();
             experience -= experienceCap;
@@ -292,9 +329,35 @@ public class PlayerStats : MonoBehaviour
     {
         if (!isInvincible)
         {
+            AudioManager.Instance.PlaySFX("PlayerHit", transform.position);
             CurrentHealth -= dmg;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
+
+            // Trigger the damage event (null because melee attacks don't have a source)
+            OnDamageTaken?.Invoke(dmg, null);
+
+            StartCoroutine(DamageFlash());
+
+            if (CurrentHealth <= 0)
+            {
+                Kill();
+            }
+        }
+    }
+
+    // Add a new method for when damage comes from a specific source
+    public void TakeDamageFromSource(float dmg, GameObject damageSource)
+    {
+        if (!isInvincible)
+        {
+            AudioManager.Instance.PlaySFX("PlayerHit", transform.position);
+            CurrentHealth -= dmg;
+            invincibilityTimer = invincibilityDuration;
+            isInvincible = true;
+
+            // Trigger the damage event with the source
+            OnDamageTaken?.Invoke(dmg, damageSource);
 
             StartCoroutine(DamageFlash());
 
@@ -318,12 +381,12 @@ public class PlayerStats : MonoBehaviour
 
     public void RestoreHealth(float amount)
     {
-        if (CurrentHealth < characterData.MaxHealth)
+        if (CurrentHealth < MaxHealth)
         {
             CurrentHealth += amount;
-            if (CurrentHealth > characterData.MaxHealth)
+            if (CurrentHealth > MaxHealth)
             {
-                CurrentHealth = characterData.MaxHealth;
+                CurrentHealth = MaxHealth;
             }
         }
     }
@@ -336,13 +399,13 @@ public class PlayerStats : MonoBehaviour
 
     void Recover()
     {
-        if(CurrentHealth < characterData.MaxHealth)
+        if(CurrentHealth < MaxHealth)
         {
             CurrentHealth += CurrentRecovery * Time.deltaTime;
 
-            if (CurrentHealth >= characterData.MaxHealth)
+            if (CurrentHealth >= MaxHealth)
             {
-                CurrentHealth = characterData.MaxHealth;
+                CurrentHealth = MaxHealth;
             }
         }
     }

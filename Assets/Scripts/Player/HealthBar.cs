@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.RestService;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HealthBar : MonoBehaviour
 {
-   
     public PlayerStats player;
     public CharacterScriptableObject playerData;
     public Slider healthSlider;
@@ -21,9 +16,7 @@ public class HealthBar : MonoBehaviour
         if (player != null)
         {
             playerData = player.characterData;
-            maxHealth = playerData.MaxHealth;
-            healthSlider.maxValue = maxHealth;
-            easeHealthSlider.maxValue = maxHealth;
+            UpdateMaxHealth();
         }
     }
 
@@ -31,6 +24,18 @@ public class HealthBar : MonoBehaviour
     {
         if (player != null)
         {
+            // Always get the current max health directly from PlayerStats
+            float currentMaxHealth = player.MaxHealth;
+
+            // Update max values if they changed
+            if (!Mathf.Approximately(maxHealth, currentMaxHealth))
+            {
+                maxHealth = currentMaxHealth;
+                healthSlider.maxValue = maxHealth;
+                easeHealthSlider.maxValue = maxHealth;
+            }
+
+            // Update current health display
             health = player.CurrentHealth;
 
             if (healthSlider.value != health)
@@ -43,5 +48,15 @@ public class HealthBar : MonoBehaviour
                 easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, health, lerpSpeed);
             }
         }
+    }
+    void UpdateMaxHealth()
+    {
+        maxHealth = playerData.MaxHealth + PlayerUpgradeManager.Instance.GetUpgradeBonus(4);
+        healthSlider.maxValue = maxHealth;
+        easeHealthSlider.maxValue = maxHealth;
+
+        // Ensure current values don't exceed new max
+        if (healthSlider.value > maxHealth) healthSlider.value = maxHealth;
+        if (easeHealthSlider.value > maxHealth) easeHealthSlider.value = maxHealth;
     }
 }

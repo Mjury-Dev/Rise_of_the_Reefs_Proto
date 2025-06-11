@@ -13,6 +13,7 @@ public class TridentController : WeaponController
     protected override void Attack()
     {
         base.Attack();
+        AudioManager.Instance.PlaySFX("ThrowTrident", transform.position);
         GameObject spawnedTrident = Instantiate(weaponData.Prefab);
         spawnedTrident.transform.position = transform.position;
         spawnedTrident.transform.parent = transform;

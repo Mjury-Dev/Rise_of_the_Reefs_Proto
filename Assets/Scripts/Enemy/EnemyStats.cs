@@ -55,6 +55,7 @@ public class EnemyStats : MonoBehaviour
 
     public void Hurt(float dmg, Vector2 sourcePosition, float knockbackForce = 2f, float knockbackDuration = 0.1f)
     {
+        AudioManager.Instance.PlaySFX("EnemyHit", transform.position);
         currentHealth -= dmg;
         SpawnSlashEffect();
         StartCoroutine(DamageFlash());
@@ -119,6 +120,7 @@ public class EnemyStats : MonoBehaviour
     }
     IEnumerator KillFade()
     {
+        AudioManager.Instance.PlaySFX("EnemyDeath", transform.position);
         WaitForEndOfFrame w = new WaitForEndOfFrame();
         float t = 0, origAlpha = sr.color.a;
 
@@ -140,7 +142,8 @@ public class EnemyStats : MonoBehaviour
             PlayerStats player = col.GetComponent<PlayerStats>();
             if (player != null)
             {
-                player.TakeDamage(currentDamage);
+                // Now passes the enemy gameObject as the damage source
+                player.TakeDamageFromSource(currentDamage, gameObject);
             }
         }
     }

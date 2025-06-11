@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShieldBehavior : ShieldWeaponBehavior
 {
     private Vector3 playerPosition;
     List<GameObject> markedEnemies;
+
+    private float hitSoundCooldown = 0.1f; // Cooldown for hit sound effect
+    private float hitSoundTimer = 0f; // Timer to track cooldown
 
     protected override void Start()
     {
@@ -24,6 +24,11 @@ public class ShieldBehavior : ShieldWeaponBehavior
 
     protected void Update()
     {
+        if (hitSoundTimer > 0f)
+        {
+            hitSoundTimer -= Time.deltaTime;
+        }
+
         Vector3 playerPosition = Camera.main.transform.position;
         transform.RotateAround(
             playerPosition,
@@ -34,22 +39,32 @@ public class ShieldBehavior : ShieldWeaponBehavior
 
     protected override void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Enemy") && !markedEnemies.Contains(col.gameObject))
+        if (col.CompareTag("Enemy") && !markedEnemies.Contains(col.gameObject))
         {
+            // Play sound ONLY when hitting an enemy (and not on cooldown)
+            if (hitSoundTimer <= 0f)
+            {
+                AudioManager.Instance.PlaySFX("ShieldHit", transform.position);
+                hitSoundTimer = hitSoundCooldown;
+            }
+
             EnemyStats enemy = col.GetComponent<EnemyStats>();
             enemy.Hurt(GetCurrentDamage(), transform.position);
-
             markedEnemies.Add(col.gameObject);
         }
         else if (col.CompareTag("Prop"))
         {
             if (col.gameObject.TryGetComponent(out BreakableProps breakable) && !markedEnemies.Contains(col.gameObject))
             {
+                 if (hitSoundTimer <= 0f)
+                {
+                    AudioManager.Instance.PlaySFX("ShieldHit", transform.position);
+                    hitSoundTimer = hitSoundCooldown;
+                }
+
                 breakable.TakeDamage(GetCurrentDamage());
                 markedEnemies.Add(col.gameObject);
             }
         }
-
-        
     }
 }

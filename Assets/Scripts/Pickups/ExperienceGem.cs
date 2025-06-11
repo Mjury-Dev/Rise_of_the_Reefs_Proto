@@ -8,6 +8,7 @@ public class ExperienceGem : Pickup, ICollectible
 
     public override void Collect()
     {
+        AudioManager.Instance.PlaySFX("PickUpExp", transform.position);
         hasBeenCollected = true;
         PlayerStats player = FindObjectOfType<PlayerStats>();
         player.IncreaseExperience(experienceGranted);
