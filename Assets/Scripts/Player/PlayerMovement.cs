@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     void SpawnAfterImage()
     {
         GameObject afterImage = Instantiate(afterImagePrefab, transform.position, Quaternion.identity);
+        afterImage.transform.localScale = transform.localScale; // match player scale
         SpriteRenderer sr = afterImage.GetComponent<SpriteRenderer>();
         SpriteRenderer playerSr = GetComponent<SpriteRenderer>();
         if (sr && playerSr)

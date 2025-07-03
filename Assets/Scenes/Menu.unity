@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.0.1-beta1
+  m_text: v0.0.2-beta1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1140,6 +1140,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c73f8004965813d40981201ab7fb5510, type: 3}
   - name: PickUpHeal
     clip: {fileID: 8300000, guid: c77154f5b6a0cb047ac99da333c9cb84, type: 3}
+  - name: SummonCompanion
+    clip: {fileID: 8300000, guid: 4a89e0c01d69ae549827c3feddf0cafb, type: 3}
+  - name: SharkBite
+    clip: {fileID: 8300000, guid: c2a40bc1fa1ba6748ab1191d0b055d0d, type: 3}
   uiSfxClips:
   - name: ClickPlay
     clip: {fileID: 8300000, guid: 91d1896ee392f0843be27cbe6c19ec9b, type: 3}

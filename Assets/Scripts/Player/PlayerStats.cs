@@ -16,11 +16,36 @@ public class PlayerStats : MonoBehaviour
     public float currentMagnet;
     public float MaxHealth;
     public int currentGold;
-
+    public int currentPets;
     public delegate void DamageTakenEvent(float damage, GameObject damageSource);
     public event DamageTakenEvent OnDamageTaken;
 
     #region Current Stats Properties
+    public int CurrentPets
+    {
+        get { return currentPets; }
+        set
+        {
+            if (currentPets != value)
+            {
+                currentPets = value;
+            }
+        }
+    }
+    public int MaxPets
+    {
+        get
+        {
+            // 1. Get the CURRENT pollution level
+            float pollution = PollutionManager.instance.PollutionLevel;
+
+            // 2. Clamp it to be safe
+            float clampedPollution = Mathf.Clamp(pollution, 0f, 100f);
+
+            // 3. Return the calculated value
+            return 11 - Mathf.CeilToInt(clampedPollution / 10f);
+        }
+    }
     public float CurrentHealth
     {
         get { return currentHealth; }
@@ -222,7 +247,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-
         experienceCap = levelRanges[0].experienceCapIncrease;
 
         GameManager.instance.currentHealthDisplay.text = "Health: " + MaxHealth;
@@ -237,6 +261,7 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.UpdateHealthCounter(CurrentHealth, Mathf.CeilToInt(MaxHealth));
         GameManager.instance.UpdateLevelCounter(level);
         GameManager.instance.UpdateGoldcounter(CurrentGold);
+        GameManager.instance.UpdatePetCounter(CurrentPets, MaxPets);
     }
 
     private void Update()

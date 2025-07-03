@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: -897382077892351140}
   - component: {fileID: 191923067812301414}
   - component: {fileID: -2844315608809252872}
-  - component: {fileID: 8852516004689974566}
+  - component: {fileID: -6628444874023480129}
+  - component: {fileID: -4138194331869955558}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: T2 Normal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -1750087216, guid: 461a02402f901df4790c4e541685bc31, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7264151, g: 0.01027944, b: 0.01027944, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,14 +137,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c524fdd44dd28804592955b91c332874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: f11829cfd5242d64486788030f5ca511, type: 2}
+  enemyData: {fileID: 11400000, guid: 704bd9aa59787cf4bb1497e2353d62b1, type: 2}
   currentMoveSpeed: 0
   currentHealth: 0
   currentDamage: 0
+  pollutionValue: 0.002
   despawnDistance: 20
   damageColor: {r: 1, g: 1, b: 1, a: 1}
-  damageFlashDuration: 0.1
-  deathFadeTime: 0.3
+  damageFlashDuration: 0.2
+  deathFadeTime: 0.6
   flashMaterial: {fileID: 2100000, guid: a919d1862e2cb6949a5fe3ec58cb9c19, type: 2}
   slashEffectPrefab: {fileID: 331046824988746114, guid: d2de00124ec3f654a8545e0209a0dac1, type: 3}
 --- !u!114 &191923067812301414
@@ -161,13 +163,7 @@ MonoBehaviour:
   drops:
   - name: Blue gem
     itemPrefab: {fileID: 817535974122149835, guid: 2964200227409ca4c9def5dba209cb38, type: 3}
-    dropRate: 90
-  - name: Blue gem
-    itemPrefab: {fileID: 508750266933378645, guid: 3ca9a87d14a3677409d40a14daf0b00b, type: 3}
-    dropRate: 8
-  - name: Blue gem
-    itemPrefab: {fileID: 3795781739894940614, guid: c5f7ac2fe1ebbde40ad3ae4e937f6091, type: 3}
-    dropRate: 2
+    dropRate: 99
 --- !u!58 &-2844315608809252872
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +173,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4678118358697865676}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 28f33d6f7ef82034a9961ccd153dbd7c, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -203,7 +199,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.359375
---- !u!50 &8852516004689974566
+--- !u!50 &-6628444874023480129
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -219,14 +215,33 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 28f33d6f7ef82034a9961ccd153dbd7c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-4138194331869955558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678118358697865676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8045a08d42ff1fd42b248c7a39455549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowSprite: {fileID: 21300000, guid: d2d469f24129f4949a84a8c4f62d3943, type: 3}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5}
+  yOffset: -0.5
+  zOffset: 0.1
+  shadowSize: 1
+  sortingLayerName: Midground
+  orderInLayer: -1

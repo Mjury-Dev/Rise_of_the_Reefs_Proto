@@ -4,7 +4,11 @@ using UnityEngine;
 public class MapController : MonoBehaviour
 {
     [Header("Chunk Settings")]
-    public List<GameObject> terrainChunks;
+    [Tooltip("The list of terrain chunks to spawn when pollution is HIGH (>= 50%).")]
+    public List<GameObject> pollutedTerrainChunks;
+    [Tooltip("The list of terrain chunks to spawn when pollution is LOW (< 50%).")]
+    public List<GameObject> cleanTerrainChunks;
+
     public GameObject player;
     public float checkerRadius = 1f;
     public LayerMask terrainMask;
@@ -75,16 +79,35 @@ public class MapController : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Spawns a chunk at the given position, choosing the chunk type based on pollution level.
+    /// </summary>
     void SpawnChunkAt(Vector3 position)
     {
-        if (terrainChunks.Count == 0)
+        // Determine which list of chunks to use based on the current pollution level.
+        List<GameObject> chunksToUse;
+
+        if (PollutionManager.instance.PollutionLevel < 50f)
         {
-            Debug.LogError("No terrain chunks in the list!");
+            chunksToUse = cleanTerrainChunks;
+            Debug.Log("Spawning a CLEAN chunk.");
+        }
+        else
+        {
+            chunksToUse = pollutedTerrainChunks;
+            Debug.Log("Spawning a POLLUTED chunk.");
+        }
+
+        // Check if the selected list has any prefabs assigned to it.
+        if (chunksToUse == null || chunksToUse.Count == 0)
+        {
+            Debug.LogError("The appropriate terrain chunk list is empty! Assign prefabs in the Inspector.");
             return;
         }
 
-        int rand = Random.Range(0, terrainChunks.Count);
-        GameObject newChunk = Instantiate(terrainChunks[rand], position, Quaternion.identity);
+        // Pick a random chunk from the selected list and spawn it.
+        int rand = Random.Range(0, chunksToUse.Count);
+        GameObject newChunk = Instantiate(chunksToUse[rand], position, Quaternion.identity);
         spawnedChunks.Add(newChunk);
     }
 
@@ -96,9 +119,17 @@ public class MapController : MonoBehaviour
 
         optimizerCooldown = optimizerCooldownDur;
 
-        foreach (GameObject chunk in spawnedChunks)
+        // Use a for loop to safely iterate while potentially modifying the list (though we aren't here)
+        for (int i = spawnedChunks.Count - 1; i >= 0; i--)
         {
-            if (chunk == null) continue;
+            GameObject chunk = spawnedChunks[i];
+
+            // If a chunk was destroyed by other means, remove it from the list.
+            if (chunk == null)
+            {
+                spawnedChunks.RemoveAt(i);
+                continue;
+            }
 
             float dist = Vector3.Distance(player.transform.position, chunk.transform.position);
             chunk.SetActive(dist <= maxOpDist);

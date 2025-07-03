@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 191923067812301414}
   - component: {fileID: -2844315608809252872}
   - component: {fileID: -6628444874023480129}
+  - component: {fileID: -4138194331869955558}
   m_Layer: 3
-  m_Name: Enemy 2
+  m_Name: T1 Normal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +141,7 @@ MonoBehaviour:
   currentMoveSpeed: 0
   currentHealth: 0
   currentDamage: 0
+  pollutionValue: 0.002
   despawnDistance: 20
   damageColor: {r: 1, g: 1, b: 1, a: 1}
   damageFlashDuration: 0.2
@@ -224,3 +226,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-4138194331869955558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678118358697865676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8045a08d42ff1fd42b248c7a39455549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowSprite: {fileID: 21300000, guid: d2d469f24129f4949a84a8c4f62d3943, type: 3}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5}
+  yOffset: -0.5
+  zOffset: 0.1
+  shadowSize: 1
+  sortingLayerName: Midground
+  orderInLayer: -1

@@ -64,7 +64,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI expCounter;
     public TextMeshProUGUI killCounter;
     public TextMeshProUGUI goldCounter;
+    public TextMeshProUGUI pollutionLevel;
     public TextMeshProUGUI timer;
+    public TextMeshProUGUI maxPetsCounter;
 
     [Header("Game Over UI")]
     public TextMeshProUGUI gameOverSubtext;
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI enemiesKilledValue;
     public TextMeshProUGUI timeSurvived;
     public TextMeshProUGUI goldEarned;
+    public TextMeshProUGUI pollutionCleared;
     public List<Image> chosenWeaponsUI = new List<Image>(2);
     public List<Image> chosenPassiveItemsUI = new List<Image>(4);
 
@@ -102,6 +105,9 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
     public bool isPaused = false;
     public bool isUpgrading = false;
+
+    public float runStartPollutionLevel; // Pollution level at the start of the run
+    public float runEndPollutionLevel; // Pollution level at the end of the run
 
     public int enemiesKilled;
     public int minutes;
@@ -401,10 +407,29 @@ public class GameManager : MonoBehaviour
         }
         expCounter.text = exp.ToString() + " / " + expCap.ToString();
     }
+    public void UpdatePollutionLevel(float pollutionLevelData)
+    {
+        // Optional: Clamp the value to ensure it's within the 0-100 range
+        float clampedPollution = Mathf.Clamp(pollutionLevelData, 0f, 100f);
+
+        // Update the text display (using F2 for more precision if you like)
+        pollutionLevel.text = $"{clampedPollution:F0}%";
+
+        // Normalize the pollution value to a 0-1 range (e.g., 50% -> 0.5)
+        float normalizedPollution = clampedPollution / 100f;
+
+        // Linearly interpolate between green and red based on the normalized value
+        pollutionLevel.color = Color.Lerp(Color.green, Color.red, normalizedPollution);
+    }
 
     public void UpdateGoldcounter(int goldAmount)
     {
         goldCounter.text = goldAmount.ToString();
+    }
+
+    public void UpdatePetCounter(int currentPets, int maxPets)
+    {
+        maxPetsCounter.text = $"{currentPets} / {maxPets}";
     }
 
     public void ShowTimeSurvived()

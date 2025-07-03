@@ -1,0 +1,664 @@
+fileFormatVersion: 2
+guid: 9e860e06a5d58ea4a958267648121544
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1329
+        width: 529
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 729e4d1fe81a3584eb0fccfb83f0cdcc
+      internalID: 736057019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_1
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 1339
+        width: 337
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc93ff11cc74594281ed3e8123e7636
+      internalID: 1018079871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_2
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 1339
+        width: 237
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4908c09920ab1ec49b22569ae945ddab
+      internalID: 645491733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_3
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 1493
+        width: 183
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d351efda2df4b24faea00c5f230c9cf
+      internalID: -1788311109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_4
+      rect:
+        serializedVersion: 2
+        x: 1774
+        y: 1479
+        width: 152
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d284ef1112e64ba4ca89bd7ce6e8eb71
+      internalID: 312620922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_5
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 1334
+        width: 194
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a94859355644d4e9f5817d1ba32a34
+      internalID: 756890205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_6
+      rect:
+        serializedVersion: 2
+        x: 1778
+        y: 1339
+        width: 154
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ec44c1abe965f84e9bd87989f186f09
+      internalID: -1249249668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_7
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 774
+        width: 439
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 572a696eaacf77f4784bfabb380892a7
+      internalID: -519369797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_8
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 783
+        width: 399
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962bdfe76c2e0024eb01d65c4540c86d
+      internalID: 1797577441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_9
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 783
+        width: 238
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba849d14d94013041962a5d4af3aee3f
+      internalID: -257600347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_10
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 783
+        width: 292
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a83da563e29fa4598058856f6fcd80
+      internalID: -1648430027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_11
+      rect:
+        serializedVersion: 2
+        x: 1738
+        y: 774
+        width: 329
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfb3da0f2bd7c924e8cfb23ced2b6d78
+      internalID: -237317723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_12
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 309
+        width: 272
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb7effe914c192b469ad9eb1555c753a
+      internalID: 1954215673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_13
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 313
+        width: 847
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f6ec99021270ee4082df32b53d14c23
+      internalID: 1261957625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_14
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 313
+        width: 212
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 242cd9d5974c18c42a026ca7f752ea6e
+      internalID: -1075216290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_15
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 313
+        width: 322
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c9a8081dedb96e49b46e9d161e7f6d5
+      internalID: -492231077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_16
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 73
+        width: 167
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60747b240e0bd724f8ce5bc8a7687fe5
+      internalID: 1402135935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_17
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 64
+        width: 167
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17c68473721c50419a82563939085b2
+      internalID: -1305991517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_18
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 73
+        width: 154
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d6c6eebd3c0bf4db87b249e3adf96a
+      internalID: -1252580189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_19
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 73
+        width: 154
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 563458dd42b1d78439fb99628bb55672
+      internalID: -2037649134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_20
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 73
+        width: 152
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ec91180f9c4b24c84524b2ba382033
+      internalID: 712163342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_21
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 73
+        width: 152
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc76bb50942b1394d871d71f121ab089
+      internalID: -2092643166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_22
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 84
+        width: 169
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cec7b83e3afc314a9d80981d95c5223
+      internalID: -495898583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_23
+      rect:
+        serializedVersion: 2
+        x: 1719
+        y: 84
+        width: 167
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 373e6b76d62d5e541a5bc093f15007d5
+      internalID: 976084136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seabed Infected Sprites_24
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 99
+        width: 84
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78b5a0ce2f3f2146a95593585c61f56
+      internalID: -1817715695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Seabed Infected Sprites_0: 736057019
+      Seabed Infected Sprites_1: 1018079871
+      Seabed Infected Sprites_10: -1648430027
+      Seabed Infected Sprites_11: -237317723
+      Seabed Infected Sprites_12: 1954215673
+      Seabed Infected Sprites_13: 1261957625
+      Seabed Infected Sprites_14: -1075216290
+      Seabed Infected Sprites_15: -492231077
+      Seabed Infected Sprites_16: 1402135935
+      Seabed Infected Sprites_17: -1305991517
+      Seabed Infected Sprites_18: -1252580189
+      Seabed Infected Sprites_19: -2037649134
+      Seabed Infected Sprites_2: 645491733
+      Seabed Infected Sprites_20: 712163342
+      Seabed Infected Sprites_21: -2092643166
+      Seabed Infected Sprites_22: -495898583
+      Seabed Infected Sprites_23: 976084136
+      Seabed Infected Sprites_24: -1817715695
+      Seabed Infected Sprites_3: -1788311109
+      Seabed Infected Sprites_4: 312620922
+      Seabed Infected Sprites_5: 756890205
+      Seabed Infected Sprites_6: -1249249668
+      Seabed Infected Sprites_7: -519369797
+      Seabed Infected Sprites_8: 1797577441
+      Seabed Infected Sprites_9: -257600347
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

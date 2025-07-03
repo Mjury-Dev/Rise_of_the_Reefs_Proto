@@ -15,6 +15,7 @@ public class EnemyStats : MonoBehaviour
     [HideInInspector]
     public float currentDamage;
 
+    public float pollutionValue; // How much pollution this enemy decreases when killed
     public float despawnDistance = 20f;
     Transform player;
 
@@ -154,6 +155,8 @@ public class EnemyStats : MonoBehaviour
         EnemySpawner es = FindObjectOfType<EnemySpawner>();
         if (es != null)
         {
+            PollutionManager.instance.DecreasePollution(pollutionValue);
+            GameManager.instance.UpdatePollutionLevel(PollutionManager.instance.PollutionLevel);
             es.OnEnemyKilled();
         }
         else
